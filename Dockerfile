@@ -1,5 +1,8 @@
 FROM aosatinsky/pp-ser
 
+ARG ARTIFACTORY_TOKEN
+ENV ARTIFACTORY_TOKEN=$ARTIFACTORY_TOKEN
+
 ADD pingpong-wallet /home/root/pingpong-wallet
 #ADD .npmrc /home/root/.npmrc
 RUN cp /home/root/pingpong-wallet/.npmrc.ci /home/root/pingpong-wallet/.npmrc
