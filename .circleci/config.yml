@@ -11,7 +11,7 @@ jobs:
         command: >-
           git clone git@github.com:ZenGo-X/pingpong-wallet.git ~/pingpong-wallet
 
-
+     - run: pwd
      - run: ls -latr      
 
      # # start proprietary DB using private Docker image
