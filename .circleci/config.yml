@@ -11,15 +11,9 @@ jobs:
         command: >-
           git clone git@github.com:ZenGo-X/pingpong-wallet.git ./pingpong-wallet
 
-     - run: pwd
-     - run: ls -latr      
-
-     # # start proprietary DB using private Docker image
-     # # with credentials stored in the UI
-     # - run: |
-     #     echo "$DOCKER_PASS" | docker login --username $DOCKER_USER --password-stdin
-
-     - run: printenv
+     #- run: pwd
+     #- run: ls -latr      
+     #- run: printenv
 
      # build the application image
      - run: docker build --build-arg ARTIFACTORY_TOKEN=$ARTIFACTORY_TOKEN -t zengocorp/buildcontainer:$CIRCLE_BRANCH .
