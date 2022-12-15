@@ -2,7 +2,7 @@ FROM aosatinsky/pp-ser
 
 ADD pingpong-wallet /home/root/pingpong-wallet
 #ADD .npmrc /home/root/.npmrc
-RUN cp .npmrc.ci .npmrc
+RUN cp pingpong-wallet/.npmrc.ci pingpong-wallet/.npmrc
 
 RUN chown -R root:root /home/root/pingpong-wallet
 
