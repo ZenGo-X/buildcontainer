@@ -1,22 +1,36 @@
 version: 2.1
+orbs:
+  artifactory: takescoop/artifactory@1.4.0
+
 
 jobs:
  build:
    machine:
     image: ubuntu-2204:2022.04.2
    steps:
-     - checkout
-     - run:
+    - checkout
+    - run:
         name: Clone Main repository
         command: >-
           git clone git@github.com:ZenGo-X/pingpong-wallet.git ./pingpong-wallet
+
+
+    - artifactory/docker-publish:
+          docker-registry: zengo.jfrog.io
+          docker-steps:
+            - run: docker build --build-arg ARTIFACTORY_TOKEN=$ARTIFACTORY_TOKEN -t $DOCKERTAG docker-publish-assets
+          docker-tag: >-
+            zengo.jfrog.io/buildcontainert:latest
+          name: Docker Publish Custom Build
+          repository: default-docker-virtual
+
 
      #- run: pwd
      #- run: ls -latr      
      #- run: printenv
 
      # build the application image
-     - run: docker build --build-arg ARTIFACTORY_TOKEN=$ARTIFACTORY_TOKEN -t zengocorp/buildcontainer:$CIRCLE_BRANCH .
+     #- run: docker build --build-arg ARTIFACTORY_TOKEN=$ARTIFACTORY_TOKEN -t zengocorp/buildcontainer:$CIRCLE_BRANCH .
 
      # deploy the image
-     - run: docker push zengocorp/buildcontainer:$CIRCLE_BRANCH
+     #- run: docker push zengocorp/buildcontainer:$CIRCLE_BRANCH
