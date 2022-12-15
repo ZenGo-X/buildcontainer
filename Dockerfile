@@ -4,6 +4,8 @@ ADD pingpong-wallet /home/root/pingpong-wallet
 #ADD .npmrc /home/root/.npmrc
 RUN cp /home/root/pingpong-wallet/.npmrc.ci /home/root/pingpong-wallet/.npmrc
 
+RUN printenv
+
 RUN chown -R root:root /home/root/pingpong-wallet
 
 #RUN ls -latr /home/root/pingpong-wallet
