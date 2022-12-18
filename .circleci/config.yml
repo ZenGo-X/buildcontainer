@@ -9,6 +9,10 @@ jobs:
     image: ubuntu-2204:2022.04.2
    steps:
      - checkout
+     - run:
+        name: Clone Main repository
+        command: >-
+          git clone git@github.com:ZenGo-X/pingpong-wallet.git ./pingpong-wallet     
      # start proprietary DB using private Docker image
      # with credentials stored in the UI
      - run: |
