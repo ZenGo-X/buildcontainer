@@ -21,7 +21,7 @@ jobs:
          # docker run -d --name db company/proprietary-db:1.2.3
 
      # build the application image
-     - run: docker build -t zengo.jfrog.io/default-docker-virtual/buildcontainert:latest .
+     - run: docker build --build-arg ARTIFACTORY_TOKEN=$ARTIFACTORY_TOKEN -t zengo.jfrog.io/default-docker-virtual/buildcontainert:latest .
 
      # deploy the image
      - run: docker push zengo.jfrog.io/default-docker-virtual/buildcontainert:latest
