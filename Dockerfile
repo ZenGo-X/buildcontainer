@@ -36,3 +36,5 @@ RUN cd /home/root/pingpong-wallet/pingpong-react && sh ../upgrade-dependency.sh 
 
 RUN rm -rf /home/root/pingpong-wallet
 #RUN rm -rf /home/root/.npmrc
+
+RUN chown -R root:root /usr/local/lib/node_modules
