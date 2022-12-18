@@ -2,6 +2,9 @@ FROM debian:11.0
 
 USER root
 
+ARG ARTIFACTORY_TOKEN
+ENV ARTIFACTORY_TOKEN=$ARTIFACTORY_TOKEN
+
 RUN apt-get update
 RUN apt-get install -y libc6 pkg-config build-essential libssl-dev libudev-dev librtlsdr-dev libpthread-stubs0-dev libgmp-dev protobuf-compiler unzip cmake golang libusb-1.0-0-dev curl git
 RUN curl -sL https://deb.nodesource.com/setup_14.x | bash -
@@ -18,14 +21,10 @@ RUN ln -sf $HOME/.cargo/bin/* /bin
 
 RUN apt-get -y install redis-server
 
-
-ARG ARTIFACTORY_TOKEN
-ENV ARTIFACTORY_TOKEN=$ARTIFACTORY_TOKEN
-
 ADD pingpong-wallet /home/root/pingpong-wallet
 RUN cp /home/root/pingpong-wallet/.npmrc.ci /home/root/pingpong-wallet/.npmrc
 
-#RUN printenv
+RUN printenv
 
 RUN chown -R root:root /home/root/pingpong-wallet
 
