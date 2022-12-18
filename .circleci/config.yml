@@ -12,6 +12,7 @@ jobs:
      # start proprietary DB using private Docker image
      # with credentials stored in the UI
      - run: |
+         echo docker login --username "$DOCKER_USER" --password-stdin "$DOCKER_REGISTRY"
          echo "$DOCKER_PASS" | docker login --username "$DOCKER_USER" --password-stdin "$DOCKER_REGISTRY"
          # docker run -d --name db company/proprietary-db:1.2.3
 
