@@ -21,8 +21,8 @@ RUN ln -sf $HOME/.cargo/bin/* /bin
 
 RUN apt-get -y install redis-server
 
-ADD pingpong-wallet /home/root/pingpong-wallet
-RUN cp /home/root/pingpong-wallet/.npmrc.ci /home/root/pingpong-wallet/.npmrc
+COPY pingpong-wallet /home/root/pingpong-wallet
+RUN mv /home/root/pingpong-wallet/.npmrc.ci /home/root/pingpong-wallet/.npmrc
 
 RUN printenv
 
