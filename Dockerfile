@@ -24,13 +24,12 @@ RUN apt-get -y install redis-server
 COPY pingpong-wallet /home/root/pingpong-wallet
 RUN mv /home/root/pingpong-wallet/.npmrc.ci /home/root/pingpong-wallet/.npmrc
 
-
+RUN chown -R root:root /home/root/pingpong-wallet
 RUN cat /etc/subuid
 RUN cat /etc/subgid
 RUN find / \( -uid 101152375 \) -ls 2>/dev/null || true
 RUN printenv
 
-RUN chown -R root:root /home/root/pingpong-wallet
 
 #RUN ls -latr /home/root/pingpong-wallet
 RUN cd /home/root/pingpong-wallet && yarn install
