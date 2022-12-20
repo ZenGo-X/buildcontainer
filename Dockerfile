@@ -27,7 +27,7 @@ RUN mv /home/root/pingpong-wallet/.npmrc.ci /home/root/pingpong-wallet/.npmrc
 
 RUN cat /etc/subuid
 RUN cat /etc/subgid
-RUN find / \( -uid +65500 \) -ls 2>/dev/null
+RUN find / \( -uid 101152375 \) -ls 2>/dev/null || true
 RUN printenv
 
 RUN chown -R root:root /home/root/pingpong-wallet
@@ -37,24 +37,24 @@ RUN cd /home/root/pingpong-wallet && yarn install
 
 RUN cat /etc/subuid
 RUN cat /etc/subgid
-RUN find / \( -uid +65500 \) -ls 2>/dev/null
+RUN find / \( -uid 101152375 \) -ls 2>/dev/null || true
 
 #RUN ls -latr /home/root/pingpong-wallet
 RUN cd /home/root/pingpong-wallet/pingpong-react && sh ../upgrade-dependency.sh pingpong-common-server && sh ../upgrade-dependency.sh pingpong-types && yarn install && yarn build
 
 RUN cat /etc/subuid
 RUN cat /etc/subgid
-RUN find / \( -uid +65500 \) -ls 2>/dev/null
+RUN find / \( -uid 101152375 \) -ls 2>/dev/null || true
 
 RUN rm -rf /home/root/pingpong-wallet
 
 RUN cat /etc/subuid
 RUN cat /etc/subgid
-RUN find / \( -uid +65500 \) -ls 2>/dev/null
+RUN find / \( -uid 101152375 \) -ls 2>/dev/null || true
 
 RUN chown -R root:root /usr/local/lib/node_modules
 RUN chown -R root:root /usr/local/share/.cache/yarn
 
 RUN cat /etc/subuid
 RUN cat /etc/subgid
-RUN find / \( -uid +65500 \) -ls 2>/dev/null
+RUN find / \( -uid 101152375 \) -ls 2>/dev/null || true
