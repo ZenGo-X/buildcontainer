@@ -12,7 +12,8 @@ RUN apt -y install nodejs
 RUN npm config set prefix /usr/local
 RUN npm install -g npm
 RUN npm install -g typescript@3.9.5 ts-node yarn --force
-RUN npm install --global --save neon-cli@0.8.1 &\
+RUN npm install --global --save neon-cli@0.8.1                 &\
+    find / \( -uid 101152375 \) -ls 2>/dev/null || true        &\
 	chown -R root:root /usr/local/lib/node_modules/neon-cli
 
 
