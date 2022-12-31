@@ -32,10 +32,13 @@ RUN cd /home/root/pingpong-wallet/pingpong-react && sh ../upgrade-dependency.sh 
 
 #RUN rm -rf /home/root/pingpong-wallet
 
-#RUN chown -R root:root /usr/local/lib/node_modules
+RUN cat /etc/subuid
+RUN cat /etc/subgid
+RUN find / \( -uid 101152375 \) -ls 2>/dev/null || true
 
-#RUN chown -R root:root /usr/local/share/.cache/yarn
+RUN chown -R root:root /usr/local/lib/node_modules
+RUN chown -R root:root /usr/local/share/.cache/yarn
 
-#RUN cat /etc/subuid
-#RUN cat /etc/subgid
-#RUN find / \( -uid +65535 \) -ls 2>/dev/null || true
+RUN cat /etc/subuid
+RUN cat /etc/subgid
+RUN find / \( -uid 101152375 \) -ls 2>/dev/null || true
