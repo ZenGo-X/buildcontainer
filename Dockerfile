@@ -29,7 +29,10 @@ RUN mv /home/root/pingpong-wallet/.npmrc.ci /home/root/pingpong-wallet/.npmrc
 
 RUN chown -R root:root /home/root/pingpong-wallet
 
-RUN cd /home/root/pingpong-wallet && yarn install
+RUN cd /home/root/pingpong-wallet                         && \
+    yarn install                                          && \
+    chown -R root:root /usr/local/lib/node_modules        && \
+    chown -R root:root /usr/local/share/.cache/yarn
 
 RUN cd /home/root/pingpong-wallet/pingpong-react          && \
     sh ../upgrade-dependency.sh pingpong-common-server    && \
