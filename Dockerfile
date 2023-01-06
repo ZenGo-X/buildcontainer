@@ -5,8 +5,11 @@ USER root
 ARG ARTIFACTORY_TOKEN
 ENV ARTIFACTORY_TOKEN=$ARTIFACTORY_TOKEN
 
-RUN apt-get update
-RUN apt-get install -y libc6 pkg-config build-essential libssl-dev libudev-dev librtlsdr-dev libpthread-stubs0-dev libgmp-dev protobuf-compiler unzip cmake golang libusb-1.0-0-dev curl git
+RUN apt-get update                                                 && \
+    apt-get install -y libc6 pkg-config build-essential libssl-dev libudev-dev librtlsdr-dev libpthread-stubs0-dev libgmp-dev protobuf-compiler unzip cmake golang libusb-1.0-0-dev curl git netcat openssh-server tar gzip ca-certificates curl        && \
+    apt-get clean 										           && \
+    apt-get purge
+
 RUN curl -sL https://deb.nodesource.com/setup_14.x | bash -
 RUN apt -y install nodejs
 RUN npm config set prefix /usr/local
@@ -28,16 +31,13 @@ RUN chown -R root:root /home/root/pingpong-wallet
 
 RUN cd /home/root/pingpong-wallet && yarn install
 
-RUN cd /home/root/pingpong-wallet/pingpong-react && sh ../upgrade-dependency.sh pingpong-common-server && sh ../upgrade-dependency.sh pingpong-types && yarn install && yarn build
-
-#RUN rm -rf /home/root/pingpong-wallet
-
-RUN cat /etc/subuid
-RUN cat /etc/subgid
-RUN find / \( -uid 101152375 \) -ls 2>/dev/null || true
-
-RUN chown -R root:root /usr/local/lib/node_modules
-RUN chown -R root:root /usr/local/share/.cache/yarn
+RUN cd /home/root/pingpong-wallet/pingpong-react          && \
+    sh ../upgrade-dependency.sh pingpong-common-server    && \
+    sh ../upgrade-dependency.sh pingpong-types            && \ 
+    yarn install                                          && \
+    yarn build                                            && \
+    chown -R root:root /usr/local/lib/node_modules        && \
+    chown -R root:root /usr/local/share/.cache/yarn
 
 RUN cat /etc/subuid
 RUN cat /etc/subgid
