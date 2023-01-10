@@ -25,7 +25,7 @@ RUN ln -sf $HOME/.cargo/bin/* /bin
 RUN apt-get -y install redis-server
 
 
-COPY pingpong-wallet .
+COPY . .
 RUN mv .npmrc.ci .npmrc
 
 #COPY pingpong-wallet /home/root/pingpong-wallet
@@ -36,13 +36,14 @@ RUN yarn install                                                   && \
     chown -R root:root /usr/local/lib/node_modules                 && \
     chown -R root:root /usr/local/share/.cache/yarn
 
-RUN sh ./upgrade-dependency.sh pingpong-common-server              && \
-    sh ./upgrade-dependency.sh pingpong-types                      && \ 
+RUN cd pingpong-react                                              && \
+    sh ../upgrade-dependency.sh pingpong-common-server             && \
+    sh ../upgrade-dependency.sh pingpong-types                     && \ 
     yarn install                                                   && \
     yarn build                                                     && \
     chown -R root:root /usr/local/lib/node_modules                 && \
     chown -R root:root /usr/local/share/.cache/yarn
 
-RUN cat /etc/subuid
-RUN cat /etc/subgid
-RUN find / \( -uid 101152375 \) -ls 2>/dev/null || true
+#RUN cat /etc/subuid
+#RUN cat /etc/subgid
+#RUN find / \( -uid 101152375 \) -ls 2>/dev/null || true
