@@ -25,7 +25,7 @@ RUN ln -sf $HOME/.cargo/bin/* /bin
 RUN apt-get -y install redis-server
 
 
-COPY . .
+ADD pingpong-wallet .
 RUN ls -latr
 RUN mv ./.npmrc.ci ./.npmrc
 
