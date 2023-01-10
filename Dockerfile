@@ -24,19 +24,20 @@ RUN ln -sf $HOME/.cargo/bin/* /bin
 
 RUN apt-get -y install redis-server
 
-COPY pingpong-wallet /home/root/pingpong-wallet
-RUN mv /home/root/pingpong-wallet/.npmrc.ci /home/root/pingpong-wallet/.npmrc
 
-RUN chown -R root:root /home/root/pingpong-wallet
+COPY . .
+RUN mv .npmrc.ci .npmrc
 
-RUN cd /home/root/pingpong-wallet                                  && \
-    yarn install                                                   && \
+#COPY pingpong-wallet /home/root/pingpong-wallet
+#RUN mv /home/root/pingpong-wallet/.npmrc.ci /home/root/pingpong-wallet/.npmrc
+#RUN chown -R root:root /home/root/pingpong-wallet
+
+RUN yarn install                                                   && \
     chown -R root:root /usr/local/lib/node_modules                 && \
     chown -R root:root /usr/local/share/.cache/yarn
 
-RUN cd /home/root/pingpong-wallet/pingpong-react                   && \
-    sh ../upgrade-dependency.sh pingpong-common-server             && \
-    sh ../upgrade-dependency.sh pingpong-types                     && \ 
+RUN sh ./upgrade-dependency.sh pingpong-common-server              && \
+    sh ./upgrade-dependency.sh pingpong-types                      && \ 
     yarn install                                                   && \
     yarn build                                                     && \
     chown -R root:root /usr/local/lib/node_modules                 && \
