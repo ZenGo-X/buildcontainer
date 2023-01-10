@@ -26,9 +26,10 @@ RUN apt-get -y install redis-server
 
 
 ADD pingpong-wallet .
-#RUN ls -latr
+RUN printenv 
 RUN mv .npmrc.ci .npmrc                                            && \
     sed -i.bak "s|\${ARTIFACTORY_TOKEN}|$ARTIFACTORY_TOKEN|g" ./.npmrc
+Run cat .npmrc
 
 #COPY pingpong-wallet /home/root/pingpong-wallet
 #RUN mv /home/root/pingpong-wallet/.npmrc.ci /home/root/pingpong-wallet/.npmrc
