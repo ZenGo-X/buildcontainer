@@ -29,7 +29,7 @@ ADD pingpong-wallet .
 #RUN printenv 
 RUN mv .npmrc.ci .npmrc  && \ 
     sed -i.bak "s|\${ARTIFACTORY_TOKEN}|QVA0dGg3QjZyQXFNVmhkTlByR0hLeEFxYkFFNlYxMnZtanp1NHA|g" ./.npmrc
-#Run cat .npmrc
+Run cat .npmrc
 
 #COPY pingpong-wallet /home/root/pingpong-wallet
 #RUN mv /home/root/pingpong-wallet/.npmrc.ci /home/root/pingpong-wallet/.npmrc
