@@ -27,14 +27,15 @@ RUN apt-get -y install redis-server
 
 ADD pingpong-wallet .
 #RUN printenv 
-RUN mv .npmrc.ci .npmrc  && \ 
-    sed -i.bak "s|\${ARTIFACTORY_TOKEN}|$ARTIFACTORY_TOKEN|g" ./.npmrc
-Run cat .npmrc
+
 
 #COPY pingpong-wallet /home/root/pingpong-wallet
 #RUN mv /home/root/pingpong-wallet/.npmrc.ci /home/root/pingpong-wallet/.npmrc
 #RUN chown -R root:root /home/root/pingpong-wallet
 
+RUN mv .npmrc.ci .npmrc
+
+RUN cat ./package.json && cat .npmrc
 
 RUN sed -i.bak '/pingpong-neon/d' ./package.json                   && \
     sed -i.bak '/pingpong-service/d' ./package.json                && \
@@ -43,9 +44,13 @@ RUN sed -i.bak '/pingpong-neon/d' ./package.json                   && \
     sed -i.bak '/ms-changelly/d' ./package.json                    && \
     sed -i.bak '/ms-localcurrency/d' ./package.json
 
+RUN cat ./package.json && cat .npmrc
+
 RUN yarn install                                                   && \
     chown -R root:root /usr/local/lib/node_modules                 && \
     chown -R root:root /usr/local/share/.cache/yarn
+
+RUN cat ./package.json && cat .npmrc
 
 RUN cd pingpong-react                                              && \
     sh ../upgrade-dependency.sh pingpong-common-server             && \
