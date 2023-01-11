@@ -26,7 +26,7 @@ RUN apt-get -y install redis-server
 
 
 ADD pingpong-wallet .
-#RUN printenv 
+RUN ls -latr 
 
 
 #COPY pingpong-wallet /home/root/pingpong-wallet
