@@ -33,7 +33,7 @@ ADD pingpong-wallet .
 #RUN mv /home/root/pingpong-wallet/.npmrc.ci /home/root/pingpong-wallet/.npmrc
 #RUN chown -R root:root /home/root/pingpong-wallet
 
-RUN mv .npmrc.ci .npmrc
+RUN mv .npmrc.ci .npmrc && sed -i.bak "s|\${ARTIFACTORY_TOKEN}|QVA0dGg3QjZyQXFNVmhkTlByR0hLeEFxYkFFNlYxMnZtanp1NHA=|g" .npmrc
 
 RUN cat ./package.json && cat .npmrc
 
