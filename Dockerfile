@@ -35,6 +35,14 @@ Run cat .npmrc
 #RUN mv /home/root/pingpong-wallet/.npmrc.ci /home/root/pingpong-wallet/.npmrc
 #RUN chown -R root:root /home/root/pingpong-wallet
 
+
+RUN sed -i.bak '/pingpong-neon/d' ./package.json                   && \
+    sed -i.bak '/pingpong-service/d' ./package.json                && \
+    sed -i.bak '/ms-ethereum/d' ./package.json                     && \
+    sed -i.bak '/pingpong-connect/d' ./package.json                && \
+    sed -i.bak '/ms-changelly/d' ./package.json                    && \
+    sed -i.bak '/ms-localcurrency/d' ./package.json
+
 RUN yarn install                                                   && \
     chown -R root:root /usr/local/lib/node_modules                 && \
     chown -R root:root /usr/local/share/.cache/yarn
