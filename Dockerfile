@@ -33,7 +33,13 @@ ADD pingpong-wallet .
 #RUN mv /home/root/pingpong-wallet/.npmrc.ci /home/root/pingpong-wallet/.npmrc
 #RUN chown -R root:root /home/root/pingpong-wallet
 
-RUN mv .npmrc.ci .npmrc && sed -i.bak "s|\${ARTIFACTORY_TOKEN}|QVA0dGg3QjZyQXFNVmhkTlByR0hLeEFxYkFFNlYxMnZtanp1NHA=|g" .npmrc
+#RUN mv .npmrc.ci .npmrc && sed -i.bak "s|\${ARTIFACTORY_TOKEN}|QVA0dGg3QjZyQXFNVmhkTlByR0hLeEFxYkFFNlYxMnZtanp1NHA=|g" .npmrc
+RUN echo @zen:registry=https://zengo.jfrog.io/artifactory/api/npm/pingpong-npm/ > .npmrc
+RUN echo //zengo.jfrog.io/artifactory/api/npm/pingpong-npm/:_auth=ZGF2aWQucm9tbUBremVuY29ycC5jb206QVBCRGJudWNHYVdEbTFlTjh2b0tMdXA4TEx4 >> .npmrc
+RUN echo //zengo.jfrog.io/artifactory/api/npm/pingpong-npm/:username=david.romm@kzencorp.com >> .npmrc
+RUN echo //zengo.jfrog.io/artifactory/api/npm/pingpong-npm/:email=david.romm@kzencorp.com >> .npmrc
+RUN echo //zengo.jfrog.io/artifactory/api/npm/pingpong-npm/:always-auth=true >> .npmrc
+RUN echo registry=https://registry.npmjs.org/ >> .npmrc
 
 RUN cat ./package.json && cat .npmrc
 
